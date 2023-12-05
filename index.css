@@ -1,0 +1,10 @@
+body {
+  /* 배경화면 설정 */
+  background-image: url('image/bg.png');
+  background-size: cover;
+  background-position: center;
+
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
