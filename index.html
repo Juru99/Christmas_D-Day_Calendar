@@ -8,7 +8,7 @@
       content="https://grayson-choi.github.io/advent_calendar/"
     />
     <meta property="og:title" content="크리스마스 디데이 캘린더" />
-    <meta property="og:image" content="image/OGimage.png" />
+    <meta property="og:image" content="assets/images/OGimage.png" />
     <meta
       property="og:description"
       content="크리스마스까지 하루가 기다려지는 즐거움, 크리스마스 디데이 캘린더를 함께 만들어봐요!"
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="css/snow.css" />
     <link rel="stylesheet" href="css/share.css" />
+    <link rel="stylesheet" href="css/music.css" />
   </head>
   <body>
     <div class="snow-wrap">
@@ -29,7 +30,7 @@
     </div>
     <section class="grid-1">
       <div class="title flex-col item-baseline">
-        <img src="image/merry.png" />
+        <img src="assets/images/merry.png" />
         <div class="countdown">
           크리스마스까지 <span id="countdown" class="countdown"></span> 남음
         </div>
@@ -306,9 +307,20 @@
           <a href="https://spartacodingclub.kr/">만들러 가기</a>
         </button>
       </div>
+      <div class="flex-row">
+        <audio
+          class="bgm"
+          src="assets/music/carol.mp3"
+          preload="auto"
+          style="display: none"
+        ></audio>
+        <div class="sound"></div>
+        <div class="sound stop"></div>
+      </div>
       <p class="copyright">Copyright ⓒ TeamSparta All rights reserved. ☃️</p>
     </footer>
     <script src="index.js"></script>
     <script src="js/share.js"></script>
+    <script src="js/music.js"></script>
   </body>
 </html>

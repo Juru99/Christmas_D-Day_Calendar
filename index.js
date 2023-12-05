@@ -78,7 +78,7 @@ const doors = document.querySelectorAll('.door');
 doors.forEach((door, index) => {
   door.addEventListener('click', () => {
     // 상위 div의 class 번호를 찾아서 image url에 사용합니다
-    const imageUrl = `image/card/card-${index + 1}.png`;
+    const imageUrl = `images/card/card-${index + 1}.png`;
 
     // 'back' 클래스를 가진 요소를 찾아 스타일을 가져옵니다.
     const doorDiv = document.querySelector(`.day-${index + 1}`);
