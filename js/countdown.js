@@ -1,5 +1,10 @@
+import DATE from '../constants/date.js';
+import MODAL_MESSAGES from '../constants/modalMessages.js';
+import TIME from '../constants/time.js';
+import { showModal } from '../index.js';
+
 // 목표 날짜 설정 (예시: 2023년 1월 1일)
-const targetDate = new Date('2023-12-25T00:00:00Z');
+const targetDate = new Date(DATE.targetDate);
 
 function updateCountdown() {
   // 현재 한국 시간을 얻어오기
@@ -11,12 +16,14 @@ function updateCountdown() {
   const timeRemaining = targetDate - now;
 
   // 시간, 분, 초 계산
-  const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  const days = Math.floor(timeRemaining / TIME.calc.day);
+  const hours = Math.floor((timeRemaining % TIME.calc.day) / TIME.calc.hour);
+  const minutes = Math.floor(
+    (timeRemaining % TIME.calc.hour) / TIME.calc.minute
   );
-  const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+  const seconds = Math.floor(
+    (timeRemaining % TIME.calc.second) / TIME.unit.oneSecond
+  );
 
   // 결과를 HTML에 업데이트
   const countdownElement = document.getElementById('countdown');
@@ -28,7 +35,7 @@ function updateCountdown() {
 updateCountdown();
 
 // 1초마다 업데이트
-setInterval(updateCountdown, 1000);
+setInterval(updateCountdown, TIME.unit.oneSecond);
 
 // 날짜 기준 카드 오픈 기능
 const doors = document.querySelectorAll('.door');
@@ -40,7 +47,7 @@ doors.forEach((door, index) => {
     );
 
     // 각 날짜에 해당하는 날짜를 계산
-    const openDate = new Date(2023, 11, index + 1); // 2023년 12월 1일부터 시작
+    const openDate = new Date(DATE.year, DATE.month, index + DATE.startDate); // 2023년 12월 1일부터 시작
 
     // 현재 날짜가 열 수 있는 날짜 이후인지 확인
     if (now.getTime() > openDate.getTime()) {
@@ -55,14 +62,14 @@ doors.forEach((door, index) => {
 
       const style = window.getComputedStyle(backDiv);
       const pTag = backDiv.querySelector('p');
-      const text = modalMessageList[index]['message'];
+      const text = MODAL_MESSAGES[index]['message'];
 
       // showModal 함수를 호출하여 모달을 표시합니다.
       showModal(imageUrl, text);
       // alert('이벤트 캘린더를 엽니다.');
     } else {
       // 현재 날짜가 열 수 있는 날짜보다 이전인 경우 몇 일 후에 열 수 있다는 메시지를 표시
-      const daysRemaining = Math.ceil((openDate - now) / (1000 * 60 * 60 * 24));
+      const daysRemaining = Math.ceil((openDate - now) / TIME.calc.day);
       console.log(openDate, now, daysRemaining);
       alert(`이 카드는 ${daysRemaining}일 후에 열 수 있어요!`);
     }
