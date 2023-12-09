@@ -78,6 +78,7 @@ body {
 }
 
 /* 그리드 별 배경 이미지 */
+
 .day-1 {
   grid-area: d1;
   background: url('assets/images/frame/frame1.png');
@@ -843,10 +844,6 @@ label {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  transform: rotateY(180deg);
-}
-
-:checked + .door {
   transform: rotateY(180deg);
 }
 

@@ -5,7 +5,7 @@ const TIME = Object.freeze({
     seconds: 60,
     hours: 24,
   },
-  calc: {
+  value: {
     second: 60_000,
     minute: 60_000,
     hour: 3_600_000,

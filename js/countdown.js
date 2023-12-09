@@ -1,7 +1,7 @@
 import DATE from '../constants/date.js';
 import MODAL_MESSAGES from '../constants/modalMessages.js';
 import TIME from '../constants/time.js';
-import { showModal } from '../index.js';
+import { showModal } from './showModal.js';
 
 // 목표 날짜 설정 (예시: 2023년 1월 1일)
 const targetDate = new Date(DATE.targetDate);
@@ -16,13 +16,13 @@ function updateCountdown() {
   const timeRemaining = targetDate - now;
 
   // 시간, 분, 초 계산
-  const days = Math.floor(timeRemaining / TIME.calc.day);
-  const hours = Math.floor((timeRemaining % TIME.calc.day) / TIME.calc.hour);
+  const days = Math.floor(timeRemaining / TIME.value.day);
+  const hours = Math.floor((timeRemaining % TIME.value.day) / TIME.value.hour);
   const minutes = Math.floor(
-    (timeRemaining % TIME.calc.hour) / TIME.calc.minute
+    (timeRemaining % TIME.value.hour) / TIME.value.minute
   );
   const seconds = Math.floor(
-    (timeRemaining % TIME.calc.second) / TIME.unit.oneSecond
+    (timeRemaining % TIME.value.second) / TIME.unit.oneSecond
   );
 
   // 결과를 HTML에 업데이트
@@ -55,22 +55,16 @@ doors.forEach((door, index) => {
 
       // 상위 div의 class 번호를 찾아서 image url에 사용합니다
       const imageUrl = `assets/images/card/card-${index + 1}.png`;
-
-      // 'back' 클래스를 가진 요소를 찾아 스타일을 가져옵니다.
-      const doorDiv = document.querySelector(`.day-${index + 1}`);
-      const backDiv = doorDiv.querySelector(`.back`);
-
-      const style = window.getComputedStyle(backDiv);
-      const pTag = backDiv.querySelector('p');
       const text = MODAL_MESSAGES[index]['message'];
+
+      door.style.transform = 'rotateY(180deg)';
 
       // showModal 함수를 호출하여 모달을 표시합니다.
       showModal(imageUrl, text);
       // alert('이벤트 캘린더를 엽니다.');
     } else {
       // 현재 날짜가 열 수 있는 날짜보다 이전인 경우 몇 일 후에 열 수 있다는 메시지를 표시
-      const daysRemaining = Math.ceil((openDate - now) / TIME.calc.day);
-      console.log(openDate, now, daysRemaining);
+      const daysRemaining = Math.ceil((openDate - now) / TIME.value.day);
       alert(`이 카드는 ${daysRemaining}일 후에 열 수 있어요!`);
     }
   });
